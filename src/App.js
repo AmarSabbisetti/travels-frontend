@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+import UserDashboard from "./UserDashboard";
+import AdminDashboard from "./AdminDashboard/packages";
+import Login from "./login/Login";
+import Register from "./register/Register";
+import Header from "./components/header";
+//import Packages from "./components/packages";
+import Logout from "./logout"
+import AddPackage from "./AdminDashboard/addPackage"
+import DetailViewData from "./AdminDashboard/packageDetail";
 
-function App() {
+
+const App = () => {
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header/>
+    <Router>
+      <Routes>
+        
+        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/logout" element={<Logout/>}/>
+        <Route path="/Addpackage" element={<AddPackage />} />
+        <Route path="/AdminDashboard" element={<AdminDashboard/>}/>
+        <Route path="/Packages/{id}" element={<DetailViewData />}/>
+        
+        {/* <Route path="/admin-login" element={<AdminDashboard />} /> */}
+      </Routes>
+    </Router>
+    </>
   );
-}
+};
 
 export default App;
