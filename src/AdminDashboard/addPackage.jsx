@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 
 const AddDataFormPage = () => {
-	console.log(localStorage.getItem("access_token"))
+	//console.log(localStorage.getItem("access_token"))
 	//const [sid, setId] = useState("");
 	const [name, setName] = useState("");
     const [description,setDescription]=useState("");
@@ -15,7 +15,7 @@ const AddDataFormPage = () => {
     const [price, setPrice]=useState("");
     const [slots, setSlots]=useState("");
 
-	const [isVisible, setIsVisible] = useState(false);
+	//const [isVisible, setIsVisible] = useState(false);
 
 	const handleDaysChange = (e) => {
 		setDays(e.target.value);
@@ -47,12 +47,12 @@ const AddDataFormPage = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		postPackage();
-		setIsVisible(false);
+		//setIsVisible(false);
 		window.location.reload(true);
 	};
 /**/
 	const postPackage = () => {
-		axiosinstance.get("/packages/",
+		axiosinstance.post("/packages/",
 		{
 			name: name,
 			description: description,
@@ -61,11 +61,7 @@ const AddDataFormPage = () => {
 			start_date: StartDate,
 			end_date: EndDate,
 			days: days
-		  },
-		  {
-			headers: {
-			  Authorization: localStorage.getItem('access_token')
-			}}
+		  }
 		).then(response => {
 		  // Handle response
 		  console.log('Package added successfully:', response.data);
@@ -80,22 +76,10 @@ const AddDataFormPage = () => {
 	return (
 		<div>
 			<div>
-				<button
-					className="addButton"
-					onClick={() => {
-						setIsVisible((prev) => !prev);
-					}}
-				>
-					<img
-						width="24"
-						height="24"
-						src="https://img.icons8.com/color/24/add--v1.png"
-						alt="add--v1"
-					/>
-				</button>
+				
 			</div>
 
-			{isVisible && (
+			{ (
 				<div className="addDataForm">
 					<form
 						onSubmit={(e) => {
@@ -128,7 +112,7 @@ const AddDataFormPage = () => {
 						<label>Price</label>
 						<br />
 						<input
-							type="text"
+							type="number"
 							value={price}
 							required
 							onChange={(e) => {
@@ -139,7 +123,7 @@ const AddDataFormPage = () => {
 						<label>Slots</label>
 						<br />
 						<input
-							type="text"
+							type="number"
 							value={slots}
 							required
 							onChange={(e) => {
@@ -150,7 +134,7 @@ const AddDataFormPage = () => {
 						<label>StartDate</label>
 						<br />
 						<input
-							type="text"
+							type="date"
 							value={StartDate}
 							required
 							onChange={(e) => {
@@ -161,7 +145,7 @@ const AddDataFormPage = () => {
 						<label>EndDate</label>
 						<br />
 						<input
-							type="text"
+							type="date"
 							value={EndDate}
 							required
 							onChange={(e) => {
@@ -172,7 +156,7 @@ const AddDataFormPage = () => {
 						<label>Days</label>
 						<br />
 						<input
-							type="text"
+							type="number"
 							value={days}
 							required
 							onChange={(e) => {

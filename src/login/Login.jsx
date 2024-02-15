@@ -5,13 +5,14 @@ import {useNavigate} from 'react-router-dom';
 import './LoginForm.css';
 import { fontWeight, textAlign } from '@mui/system';
 import axiosinstance from '../axiosConfig';
+import { useUserContext } from '../context/userContext';
 
 
 const LoginForm = (onLogin) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user');
   const [loggedIn, setLoggedIn] = useState(false);
+  const {role, setRole} = useUserContext()
   const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
@@ -51,9 +52,9 @@ useEffect(() => {
     // Redirect the user based on their role after successful login
     if (loggedIn) {
       if (role === 'admin') {
-        navigate('/AdminDashboard');
+        navigate('/Dashboard');
       } else {
-        navigate('/AdminDashboard');
+        navigate('/Dashboard');
       }
     }
   }, [loggedIn,role, navigate]);

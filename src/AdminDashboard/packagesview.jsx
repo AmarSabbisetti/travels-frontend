@@ -1,5 +1,5 @@
 import React from 'react';
-import PackageCard from 'Card'; // Assuming PackageCard component is in the same directory
+// Assuming PackageCard component is in the same directory
 
 function Dashboard({ packages }) {
   return (

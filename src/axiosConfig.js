@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL; // Replace with your base URL
+const baseURL = process.env.REACT_APP_API_BASE_URL; // Replace with your base URL
 
 const axiosinstance = axios.create({
   baseURL,

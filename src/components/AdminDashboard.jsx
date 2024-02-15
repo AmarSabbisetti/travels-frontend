@@ -3,8 +3,10 @@ import React from 'react';
 import Packages from './AdminDashboard';
 
 const AdminDashboard = () => {
+	
   return (
     <div>
+		
       <h1>Admin Dashboard</h1>
       <Packages />
     </div>

@@ -7,33 +7,30 @@ import Login from "./login/Login";
 import Register from "./register/Register";
 import Header from "./components/header";
 //import Packages from "./components/packages";
-import Logout from "./logout"
-import AddPackage from "./AdminDashboard/addPackage"
-import DetailViewData from "./AdminDashboard/packageDetail";
-
+import Logout from "./logout";
+import AddPackage from "./AdminDashboard/addPackage";
+import PackageDetailsPage from "./AdminDashboard/packageDetail";
+import UserProvider from "./context/userContext";
 
 const App = () => {
-
-  
-
   return (
-    <>
-    <Header/>
-    <Router>
-      <Routes>
-        
-        <Route path="/" element={<HomePage />}/>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/logout" element={<Logout/>}/>
-        <Route path="/Addpackage" element={<AddPackage />} />
-        <Route path="/AdminDashboard" element={<AdminDashboard/>}/>
-        <Route path="/Packages/{id}" element={<DetailViewData />}/>
-        
-        {/* <Route path="/admin-login" element={<AdminDashboard />} /> */}
-      </Routes>
-    </Router>
-    </>
+    <UserProvider>
+      <Header />
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/Addpackage" element={<AddPackage />} />
+          {/* <Route path="/AddPlace" element={<AddPlaceDataFormPage />} /> */}
+          <Route path="/Dashboard" element={<AdminDashboard />} />
+          {/* <Route path="/packages/:id" element={<PackageDetailsPage/>} /> */}
+          <Route path="/packages/:id" element={<PackageDetailsPage />} />
+          {/* <Route path="/admin-login" element={<AdminDashboard />} /> */}
+        </Routes>
+      </Router>
+    </UserProvider>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
+import axiosinstance from '../axiosConfig';
 
 
 function Register() {
@@ -11,31 +12,29 @@ function Register() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-
         // Send the registration data to the backend
         try {
-            const response = await fetch('http://127.0.0.1:8000/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                // body: JSON.stringify({ userID, password }),
-                body: JSON.stringify({
-                    "email": userID,
-                    "password": password
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Registration failed');
+            
+            const response = await axiosinstance.post("/register", {
+                email: userID,
+                password: password
+              });
+              if (response.status >= 200 && response.status < 300) {
+                // Registration successful
+                console.log("You are registered");
+                setRegistered(true);
+          
+                // Navigate to the register success page
+                navigate("/login");
+              } else {
+                // Handle non-successful registration
+                throw new Error("Registration failed");
+              }
+            } catch (error) {
+              // Handle registration error
+              console.error("Registration error:", error);
+              alert("Registration failed");
             }
-
-            setRegistered(true)
-            // You can handle successful registration here
-        } catch (error) {
-            console.error('Registration error:', error);
-            // Handle registration error
-        }
     };
 
     useEffect(() => {
