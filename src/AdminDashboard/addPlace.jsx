@@ -1,6 +1,6 @@
 import axiosinstance from "../axiosConfig";
 import { useState } from "react";
-import { useLocation,useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AddPlaceDataFormPage = () => {
   //console.log(localStorage.getItem("access_token"))
@@ -8,17 +8,17 @@ const AddPlaceDataFormPage = () => {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [Img, setImg] = useState("");
+  ////const [Img, setImg] = useState("");
 
   //const [isVisible, setIsVisible] = useState(false);
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+   setName(e.target.value);
   };
 
-  const handleImgChange = (e) => {
-    setImg(e.target.value);
-  };
+  // const handleImgChange = (e) => {
+  //  // setImg(e.target.value);
+  // };
 
   const handleDescrptionChange = (e) => {
     setDescription(e.target.value);
@@ -36,7 +36,7 @@ const AddPlaceDataFormPage = () => {
       .post("/packages/"+id+"/places/", {
         name: name,
         description: description,
-        Img:Img
+        // Img:Img
       })
       .then((response) => {
         // Handle response
@@ -90,7 +90,7 @@ const AddPlaceDataFormPage = () => {
               accept="image/*"
               required
               onChange={(e) => {
-                handleImgChange(e);
+               // handleImgChange(e);
               }}
             />
             <br />

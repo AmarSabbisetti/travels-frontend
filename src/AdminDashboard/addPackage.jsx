@@ -59,8 +59,7 @@ const AddDataFormPage = () => {
 			slots: slots,
 			price: price,
 			start_date: StartDate,
-			end_date: EndDate,
-			days: days
+			end_date: EndDate
 		  }
 		).then(response => {
 		  // Handle response
@@ -86,7 +85,7 @@ const AddDataFormPage = () => {
 							handleSubmit(e);
 						}}
 					>
-						<h3>Add Student Details</h3>
+						<h3>Add Package Details</h3>
 						<label>Name</label>
 						<br />
 						<input
@@ -153,7 +152,7 @@ const AddDataFormPage = () => {
 							}}
 						/>
 						<br />
-						<label>Days</label>
+						{/* <label>Days</label>
 						<br />
 						<input
 							type="number"
@@ -162,7 +161,7 @@ const AddDataFormPage = () => {
 							onChange={(e) => {
 								handleDaysChange(e);
 							}}
-						 />
+						 /> */}
 						<br />
 						<input
 							type="submit"

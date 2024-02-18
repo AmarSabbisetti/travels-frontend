@@ -11,6 +11,7 @@ import Logout from "./logout";
 import AddPackage from "./AdminDashboard/addPackage";
 import PackageDetailsPage from "./AdminDashboard/packageDetail";
 import UserProvider from "./context/userContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -18,16 +19,18 @@ const App = () => {
       <Header />
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />}/>
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/Addpackage" element={<AddPackage />} />
-          {/* <Route path="/AddPlace" element={<AddPlaceDataFormPage />} /> */}
-          <Route path="/Dashboard" element={<AdminDashboard />} />
-          {/* <Route path="/packages/:id" element={<PackageDetailsPage/>} /> */}
-          <Route path="/packages/:id" element={<PackageDetailsPage />} />
-          {/* <Route path="/admin-login" element={<AdminDashboard />} /> */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/Addpackage" element={<AddPackage />} />
+            {/* <Route path="/AddPlace" element={<AddPlaceDataFormPage />} /> */}
+            <Route path="/Dashboard" element={<AdminDashboard />} />
+            {/* <Route path="/packages/:id" element={<PackageDetailsPage/>} /> */}
+            <Route path="/packages/:id" element={<PackageDetailsPage />} />
+            {/* <Route path="/admin-login" element={<AdminDashboard />} /> */}
+          </Route>
         </Routes>
       </Router>
     </UserProvider>

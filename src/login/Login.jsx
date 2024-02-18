@@ -1,18 +1,17 @@
 import React, { useState ,useEffect} from 'react';
-import axios from '../axiosConfig';
+// import axios from '../axiosConfig';
 import {Link} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import './LoginForm.css';
-import { fontWeight, textAlign } from '@mui/system';
+// import { fontWeight, textAlign } from '@mui/system';
 import axiosinstance from '../axiosConfig';
 import { useUserContext } from '../context/userContext';
 
 
 const LoginForm = (onLogin) => {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const {role, setRole} = useUserContext()
+  const [password, setPassword] = useState('')
+  const {role, setRole, isLoggedIn, setIsLoggedIn} = useUserContext()
   const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
@@ -20,7 +19,7 @@ const LoginForm = (onLogin) => {
     console.log(localStorage.getItem('access_token'))
 
     try {
-      const response = await axiosinstance
+       await axiosinstance
       .post('/login/'+role, {
         email:username,
         password:password
@@ -29,10 +28,11 @@ const LoginForm = (onLogin) => {
         console.log(res.data.message)
         console.log(res.data.token.access)
         localStorage.setItem('access_token',res.data.token.access);
-        console.log(localStorage.getItem('access_token'))
+        // console.log(localStorage.getItem('access_token'))
         localStorage.setItem('refresh_token',res.data.token.refresh);
         axiosinstance.defaults.headers['Authorization']='JWT '+ localStorage.getItem('access_token');
-        console.log(axiosinstance.defaults.headers['Authorization'])
+        // console.log(axiosinstance.defaults.headers['Authorization'])
+        navigate('/Dashboard');
         //onLogin=(token);
       });
       
@@ -45,19 +45,15 @@ const LoginForm = (onLogin) => {
 const handleLoginSuccess = (role) => {
     // Here you can store the token in localStorage or handle any other logic
     // Redirect to another page
-    setLoggedIn(true)
+    setIsLoggedIn(true)
     setRole(role)
 }; 
 useEffect(() => {
     // Redirect the user based on their role after successful login
-    if (loggedIn) {
-      if (role === 'admin') {
+    if (localStorage.getItem('access_token')!==null) {
         navigate('/Dashboard');
-      } else {
-        navigate('/Dashboard');
-      }
     }
-  }, [loggedIn,role, navigate]);
+  }, [isLoggedIn,role, navigate]);
 
   return (
     <>

@@ -12,9 +12,7 @@ const Header = () => {
       <div className="head">
         Tour Travels
         <div className="right">{role}</div>
-        
       </div>
-      
     </div>
   );
 };
